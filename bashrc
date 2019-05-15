@@ -14,6 +14,7 @@ function localdev-dcp {
 # Provide a way to easily update the setup.
 ##
 function lupus-localdev-update {
+(
   set -ex
   cd ~/.lupus-localdev
   if ! git status --porcelain; then
@@ -22,4 +23,5 @@ function lupus-localdev-update {
   fi
   git pull
   docker-compose up -d --build
+)
 }
