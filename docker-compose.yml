@@ -5,27 +5,27 @@ services:
     container_name: traefik
     command: |
       -c /etc/traefik/traefik.toml
-      --docker.domain=${BASE_DOMAIN:-localdev.space}
+      --docker.domain=${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}
       --docker.network=traefik
     labels:
       traefik.enable: true
       traefik.backend: "traefik"
-      traefik.frontend.rule: "Host:traefik.${BASE_DOMAIN:-localdev.space}"
+      traefik.frontend.rule: "Host:traefik.${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}"
       traefik.port: "8080"
-      traefik.frontend.auth.basic.users: ${TRAEFIK_ADMIN_USERS:-}
+      traefik.frontend.auth.basic.users: ${LUPUS_LOCALDEV_TRAEFIK_ADMIN_USERS:-}
     ports:
-      - "${WEB_LISTEN_IP:-127.0.0.1}:${WEB_HTTP_PORT:-80}:80"
-      - "${WEB_LISTEN_IP:-127.0.0.1}:${WEB_HTTPS_PORT:-443}:443"
+      - "${LUPUS_LOCALDEV_WEB_LISTEN_IP:-127.0.0.1}:${LUPUS_LOCALDEV_WEB_HTTP_PORT:-80}:80"
+      - "${LUPUS_LOCALDEV_WEB_LISTEN_IP:-127.0.0.1}:${LUPUS_LOCALDEV_WEB_HTTPS_PORT:-443}:443"
     expose:
       # traefik Dashboard port
       - 8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./${TRAEFIK_CONFIG:-traefik/traefik.defaults.toml}:/etc/traefik/traefik.toml
+      - ./${LUPUS_LOCALDEV_TRAEFIK_CONFIG:-traefik/traefik.defaults.toml}:/etc/traefik/traefik.toml
       - ./acme:/etc/traefik/acme
     networks:
       - traefik
-    restart: ${COMPOSER_CONTAINER_RESTART:-always}
+    restart: ${LUPUS_LOCALDEV_CONTAINER_RESTART:-always}
 
 networks:
   traefik:
