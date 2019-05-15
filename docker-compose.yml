@@ -1,5 +1,6 @@
 version: '2.3'
 services:
+
   traefik:
     image: traefik
     container_name: traefik
@@ -28,6 +29,24 @@ services:
       - traefik
     restart: ${LUPUS_LOCALDEV_CONTAINER_RESTART:-always}
 
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    restart: ${LUPUS_LOCALDEV_CONTAINER_RESTART:-always}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      traefik.enable: true
+      traefik.backend: portainer
+      traefik.frontend.rule: "Host:portainer.${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}"
+      traefik.port: "9000"
+      traefik.frontend.auth.basic.users: ${LUPUS_LOCALDEV_TRAEFIK_ADMIN_USERS:-}
+
 networks:
   traefik:
     name: traefik
+
+volumes:
+  portainer_data:

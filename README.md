@@ -1,12 +1,14 @@
 # Lupus localdev Setup
 
-Additions for making local development with docker-compose nicer. The setup
-plays nice together with projects using [drunomics/devsetup-docker](https://github.com/drunomics/devsetup-docker/tree/2.x).
+Provides a central docker-compose configuration for making local development with docker-compose based projects
+nicer. The setup plays nice together with projects using [drunomics/devsetup-docker](https://github.com/drunomics/devsetup-docker/tree/2.x).
 
 ## Features
 
- * Runs a central traefik reverse proxy and binds it to localhost, such that
+ * Runs a central [traefik](https://traefik.io/) reverse proxy and binds it to localhost, such that
    multiple projects can be run at the same time. It's dashboard is available at http://traefik.localdev.space
+   
+ * Provides [portainer](https://www.portainer.io/) as docker UI at http://portainer.localdev.space/ 
    
  * Provides some useful bash aliases and short-cuts, see "Provided commands" below.
 
