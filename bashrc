@@ -25,3 +25,10 @@ function lupus-localdev-update {
   docker-compose up -d --build
 )
 }
+
+### Default settings for devsetup-docker projects:
+
+# Use a different HTTP port, so it won't collide with ours.
+export WEB_HTTP_PORT=0
+# Ensure the right user id is used.
+export COMPOSE_DEFAULT_USER=$(id -u $USER)
