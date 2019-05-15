@@ -1,0 +1,26 @@
+debug = false
+
+logLevel = "INFO"
+defaultEntryPoints = ["https","http"]
+
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+  [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+    [entryPoints.https.tls]
+
+  [entryPoints.api]
+    address = ":8080"
+[retry]
+
+[docker]
+  watch = true
+  exposedByDefault = false
+
+[api]
+  entryPoint = "api"
+  dashboard = true
+
