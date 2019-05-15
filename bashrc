@@ -23,7 +23,10 @@ function lupus-localdev-update {
   fi
   git pull
   docker-compose up -d --build
+  bash
 )
+# Restart bash so any bashrc updates ares added in.
+bash
 }
 
 ### Default settings for devsetup-docker projects:
