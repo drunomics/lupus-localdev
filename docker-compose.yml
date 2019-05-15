@@ -24,6 +24,7 @@ services:
       - ./${LUPUS_LOCALDEV_TRAEFIK_CONFIG:-traefik/traefik.defaults.toml}:/etc/traefik/traefik.toml
       - ./acme:/etc/traefik/acme
     networks:
+      - default
       - traefik
     restart: ${LUPUS_LOCALDEV_CONTAINER_RESTART:-always}
 

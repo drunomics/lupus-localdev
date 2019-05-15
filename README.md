@@ -14,8 +14,9 @@ plays nice together with projects using [drunomics/devsetup-docker](https://gith
 ## Installation
 
     git clone git@github.com:drunomics/lupus-localdev.git --branch=2.x ~/.lupus-localdev
-    source ~/.lupus-localdev/bashrc
-    // @todo
+    echo "# Add lupus-localdev setup and aliases." >> ~/.bashrc
+    echo 'source ~/.lupus-localdev/bashrc' >> ~/.bashrc
+    bash
 
 ## Usage
 
