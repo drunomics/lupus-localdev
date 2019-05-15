@@ -2,6 +2,7 @@ version: '2.3'
 services:
   traefik:
     image: traefik
+    container_name: traefik
     command: |
       -c /etc/traefik/traefik.toml
       --docker.domain=${BASE_DOMAIN:-localdev.space}

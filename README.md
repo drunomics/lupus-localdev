@@ -6,7 +6,7 @@ plays nice together with projects using [drunomics/devsetup-docker](https://gith
 ## Features
 
  * Runs a central traefik reverse proxy and binds it to localhost, such that
-   multiple projects can be run at the same time.
+   multiple projects can be run at the same time. It's dashboard is available at http://traefik.localdev.space
    
  * Provides some useful bash aliases and short-cuts, see "Provided commands" below.
 
