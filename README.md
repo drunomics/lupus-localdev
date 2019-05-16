@@ -33,6 +33,12 @@ all the time. However one can manually restart / stop / start it with the provid
     # Restart
     localdev-dcp restart
 
+## Uninstall
+
+    localdev-dcp down -v
+    sed -i '/lupus-localdev/d' ~/.bashrc
+    rm -rf ~/.lupus-localdev
+
 ## Provided commands
 
  - `dcp`  
