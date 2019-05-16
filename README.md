@@ -19,6 +19,8 @@ nicer. The setup plays nice together with projects using [drunomics/devsetup-doc
     echo "# Add lupus-localdev setup and aliases." >> ~/.bashrc
     echo 'source ~/.lupus-localdev/bashrc' >> ~/.bashrc
     bash
+    # Register and launch docker containers.
+    localdev-dcp up -d
 
 ## Usage
 
