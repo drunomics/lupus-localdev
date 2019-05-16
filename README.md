@@ -41,6 +41,6 @@ all the time. However one can manually restart / stop / start it with the provid
  - `localdev-dcp`  
     Runs docker-compose for the lupus-localdev services, like traefik.
 
- - `lupus-localdev-update`
+ - `localdev-update`
     Updates the localdev setup with latest upstream changes. Updates just pull
     in changes in the current branch, what will never including breaking changes.

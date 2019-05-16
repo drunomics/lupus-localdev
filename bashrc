@@ -13,7 +13,7 @@ function localdev-dcp {
 ##
 # Provide a way to easily update the setup.
 ##
-function lupus-localdev-update {
+function localdev-update {
 (
   set -ex
   cd ~/.lupus-localdev
