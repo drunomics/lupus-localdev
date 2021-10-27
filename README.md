@@ -35,6 +35,15 @@ all the time. However one can manually restart / stop / start it with the provid
     # Restart
     localdev-dcp restart
 
+Using this centralized traefik network means it is an external network in respect to projects' own ecosystem and it should be declared as such:
+
+```yaml
+networks:
+  traefik:
+    name: traefik
+    external: true
+```
+
 ## Uninstall
 
     localdev-dcp down -v
