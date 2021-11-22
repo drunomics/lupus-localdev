@@ -35,6 +35,8 @@ all the time. However one can manually restart / stop / start it with the provid
     # Restart
     localdev-dcp restart
 
+## Per-project setup changes
+
 Using this centralized traefik network means it is an external network in respect to projects' own ecosystem and it should be declared as such:
 
 ```yaml
