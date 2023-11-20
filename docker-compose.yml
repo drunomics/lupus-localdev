@@ -2,18 +2,23 @@ version: '2.3'
 services:
 
   traefik:
-    image: traefik:v1.7.18
+    image: traefik:${TRAEFIK_VERSION:-latest}
     container_name: traefik
     command: |
-      -c /etc/traefik/traefik.toml
-      --docker.domain=${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}
-      --docker.network=traefik
+      --log.level=DEBUG
+      --providers.docker=true
+      --providers.docker.watch=true
+      --providers.docker.exposedbydefault=false
+      --entrypoints.http.address=:80
+      --entrypoints.https.address=:443
+      --api.dashboard=true
     labels:
       traefik.enable: true
-      traefik.backend: "traefik"
-      traefik.frontend.rule: "Host:traefik.${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}"
-      traefik.port: "8080"
-      traefik.frontend.auth.basic.users: ${LUPUS_LOCALDEV_TRAEFIK_ADMIN_USERS:-}
+      traefik.docker.network: traefik
+      traefik.http.routers.traefik.service: api@internal
+      traefik.http.routers.traefik.rule: "Host(`traefik.${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}`)"
+      traefik.http.routers.traefik.entrypoints: "http"
+
     ports:
       - "${LUPUS_LOCALDEV_WEB_LISTEN_IP:-127.0.0.1}:${LUPUS_LOCALDEV_WEB_HTTP_PORT:-80}:80"
       - "${LUPUS_LOCALDEV_WEB_LISTEN_IP:-127.0.0.1}:${LUPUS_LOCALDEV_WEB_HTTPS_PORT:-443}:443"
@@ -22,7 +27,6 @@ services:
       - 8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./${LUPUS_LOCALDEV_TRAEFIK_CONFIG:-traefik/traefik.defaults.toml}:/etc/traefik/traefik.toml
       - ./acme:/etc/traefik/acme
     networks:
       - default
@@ -39,10 +43,9 @@ services:
       - portainer_data:/data
     labels:
       traefik.enable: true
-      traefik.backend: portainer
-      traefik.frontend.rule: "Host:portainer.${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}"
-      traefik.port: "9000"
-      traefik.frontend.auth.basic.users: ${LUPUS_LOCALDEV_TRAEFIK_ADMIN_USERS:-}
+      traefik.http.services.portainer_service.loadbalancer.server.port: 9000
+      traefik.http.routers.portainer.entrypoints: "http"
+      traefik.http.routers.portainer.rule: "Host(`portainer.${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}`)"
 
 networks:
   traefik:
