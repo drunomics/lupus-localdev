@@ -2,7 +2,7 @@ version: '2.3'
 services:
 
   traefik:
-    image: traefik:${TRAEFIK_VERSION:-latest}
+    image: traefik:${TRAEFIK_VERSION:-2.11.21}
     container_name: traefik
     command: |
       --log.level=DEBUG
@@ -18,7 +18,7 @@ services:
       traefik.http.routers.traefik.service: api@internal
       traefik.http.routers.traefik.rule: "Host(`traefik.${LUPUS_LOCALDEV_BASE_DOMAIN:-localdev.space}`)"
       traefik.http.routers.traefik.entrypoints: "http"
-
+      traefik.http.middlewares.redirect-http-to-https.redirectscheme.scheme: "https"
     ports:
       - "${LUPUS_LOCALDEV_WEB_LISTEN_IP:-127.0.0.1}:${LUPUS_LOCALDEV_WEB_HTTP_PORT:-80}:80"
       - "${LUPUS_LOCALDEV_WEB_LISTEN_IP:-127.0.0.1}:${LUPUS_LOCALDEV_WEB_HTTPS_PORT:-443}:443"
