@@ -1,8 +1,7 @@
-version: '2.3'
 services:
 
   traefik:
-    image: traefik:${TRAEFIK_VERSION:-2.11.21}
+    image: traefik:${TRAEFIK_VERSION:-3.6.1}
     container_name: traefik
     command: |
       --log.level=DEBUG
@@ -12,6 +11,7 @@ services:
       --entrypoints.http.address=:80
       --entrypoints.https.address=:443
       --api.dashboard=true
+      --core.defaultRuleSyntax=v2
     labels:
       traefik.enable: true
       traefik.docker.network: traefik
